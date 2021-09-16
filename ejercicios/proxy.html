@@ -27,13 +27,13 @@
       };
 
       const handler = {
-        get(obj, prop) {
-          if (prop in obj) {
-            return obj[prop];
+        get(obj, prop) { // objeto , propiedad
+          if (prop in obj) { // existe propiedad en el objeto?
+            return obj[prop]; 
           }
 
           const suggestion = Object.keys(obj).find(key => {
-            return Levenshtein.get(key, prop) <= 3;
+            return Levenshtein.get(key, prop) <= 3; //Busca palabra con diferencia menor a 3
           });
 
           if (suggestion) {
@@ -46,7 +46,7 @@
         },
       };
 
-      const p = new Proxy(target, handler);
+      const p = new Proxy(target, handler); // target objeto a interceptar
     </script>
   </body>
 </html>
