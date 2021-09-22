@@ -1,0 +1,38 @@
+https://astexplorer.net/
+confi babel-eslint 
+transform version 4
+
+
+Pestaña 1
+const pi = 3.1416;
+const half_pi = 1.57075;
+//variable constantes
+//variables que guarden un numero
+
+//nombre de la variable debe estar en UPPERCASE
+
+pestaña abajo:
+
+export default function(context) {
+  return {
+    VariableDeclaration(node){
+      console.log(node);
+      //tipo de variable
+      if (node.kind === "const"){
+        const declaration = node.declarations[0];
+        // asegurarnos que el valor es un número
+        if (typeof declaration.init.value === "number"){
+          if (declaration.id.name !== declaration.id.name.toUpperCase()){
+            context.report({
+            	node:declaration.id,
+              	message: "El nombre de la constante debe estar en mayúsculas",
+              	fix: function(fixer){
+              	return fixer.replaceText(declaration.id, declaration.id.name.toUpperCase())
+            	}
+            })
+          }
+        }
+      }
+  	}
+}
+}
